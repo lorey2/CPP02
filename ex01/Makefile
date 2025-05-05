@@ -11,7 +11,7 @@ SRC			=	main.cpp Fixed.cpp
 				
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
-CC				=	c++
+CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
