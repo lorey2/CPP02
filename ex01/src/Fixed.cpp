@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 17:13:16 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/05 19:51:02 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/07 17:27:56 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Fixed::Fixed() : _value(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value) : _value(value)
+Fixed::Fixed(const int value) : _value(value << _bit_nbr)
 {
 	std::cout << "Int construcotr called" << std::endl;
 }
@@ -25,7 +25,7 @@ Fixed::Fixed(const int value) : _value(value)
 Fixed::Fixed(const float fvalue)
 {
 	std::cout << "Float construcotr called" << std::endl;
-	_value = (int)roundf(fvalue * (1 << _bit_nbr));
+	_value = (int)roundf(fvalue  * (1 << _bit_nbr));
 }
 
 Fixed::Fixed(const Fixed &fixed)
@@ -57,7 +57,7 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits(void) const
 {
-//	std::cout << "getRawBits member fuction called" << std::endl;
+	std::cout << "getRawBits member fuction called" << std::endl;
     return this->_value;
 }
 
@@ -66,10 +66,18 @@ void Fixed::setRawBits(int const raw)
     this->_value = raw;
 }
 
+float	Fixed::toFloat(void) const
+{
+	return ((float)this->_value / (1 << this->_bit_nbr));
+}
+
+int		Fixed::toInt(void) const
+{
+	return (roundf((float)this->_value / (1 << this->_bit_nbr)));
+}
+
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
 {
-    // Use the public getRawBits() method to access the value
-    os << fixed.getRawBits();
-    // Return the stream to allow chaining (e.g., std::cout << a << b;)
+    os << fixed.toFloat();
     return os;
 }

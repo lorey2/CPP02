@@ -1,4 +1,4 @@
-NAME			=	ex01
+NAME			=	BSP
 
 SRC_DIR		=	./src/
 OBJ_DIR		=	obj/
@@ -7,7 +7,7 @@ INCS_DIR	=	includes
 MAIN_INC	= -I $(INCS_DIR)
 INCS		=	$(shell find $(INCS_DIR) -type f -name "*.hpp")
 
-SRC			=	main.cpp Fixed.cpp
+SRC			=	main.cpp Fixed.cpp Point.cpp bsp.cpp
 				
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
